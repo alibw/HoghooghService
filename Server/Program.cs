@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.KeepAliveTimeout = TimeSpan.FromSeconds(60);
-    options.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(60);
+    options.Limits.KeepAliveTimeout = TimeSpan.FromSeconds(110);
+    options.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(110);
 });
 
 var app = builder.Build();
@@ -18,7 +18,7 @@ app.MapPost("/Calculate", async (HttpContext context, string month, string year,
 {
     try
     {
-        await Task.Delay(timeout);
+        await Task.Delay(timeout * 1000);
         return Results.Ok("Request completed successfully");
     }
     catch (OperationCanceledException)
