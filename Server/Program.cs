@@ -21,9 +21,9 @@ app.MapPost("/Calculate", async (HttpContext context, string month, string year,
         await Task.Delay(timeout * 1000);
         return Results.Ok("Request completed successfully");
     }
-    catch (OperationCanceledException)
+    catch (Exception e)
     {
-        return Results.StatusCode(408);
+        return Results.Problem(e.Message);
     }
 });
 
